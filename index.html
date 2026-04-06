@@ -13,8 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-    <!-- FullCalendar JS -->
+    <!-- FullCalendar JS + Locale -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js"></script>
 </head>
 <body>
     <div class="background-animation">
@@ -98,6 +99,34 @@
             <div id="calendar-container">
                 <div id="calendar"></div>
             </div>
+            <div class="admin-access">
+                <button id="adminLoginBtn" class="admin-btn">Acceso Administrador</script>
+            </div>
+        </section>
+
+        <!-- Admin Panel (Hidden by default) -->
+        <section id="adminPanel" class="glass-card fade-in hidden" style="margin-top: 30px; background: rgba(0, 0, 0, 0.4);">
+            <header class="header">
+                <h2>Gestión de Turnos (Admin)</h2>
+                <p>Control total de las reservas.</p>
+            </header>
+            <div class="table-responsive">
+                <table id="adminTable" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Turno</th>
+                            <th>Paciente</th>
+                            <th>WhatsApp</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Turnos dynamic -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="closeAdminBtn" class="submit-btn" style="background: rgba(255,255,255,0.1); color: white; margin-top: 20px;">Cerrar Panel</button>
         </section>
     </main>
 
