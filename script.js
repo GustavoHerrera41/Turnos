@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nombre: formData.get('nombre'),
             whatsapp: formData.get('whatsapp'),
             domicilio: formData.get('domicilio'),
+            fecha: formData.get('fecha'),
             turno: formData.get('turno'),
             consulta: formData.get('consulta')
         };
@@ -50,12 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     nombre: data.nombre,
                     whatsapp: data.whatsapp,
                     domicilio: data.domicilio,
+                    fecha: data.fecha,
                     turno: data.turno,
                     consulta: data.consulta
                 }]);
 
             if (dbError) throw dbError;
 
+            // Refresh calendar after booking
+            loadEvents();
+            
             button.innerText = '¡Redirigiendo!';
             
             setTimeout(() => {
@@ -72,6 +77,55 @@ document.addEventListener('DOMContentLoaded', () => {
             button.disabled = false;
         }
     });
+
+    // --- Calendar Implementation ---
+    let calendar;
+    const calendarEl = document.getElementById('calendar');
+
+    const initCalendar = () => {
+        calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,listWeek'
+            },
+            locale: 'es',
+            events: [],
+            eventClick: function(info) {
+                alert('Turno de: ' + info.event.title + '\nHorario: ' + info.event.extendedProps.horario);
+            }
+        });
+        calendar.render();
+    };
+
+    const loadEvents = async () => {
+        const supabaseUrl = 'https://shuivcasusmplmkhmepi.supabase.co';
+        const supabaseKey = 'sb_publishable_uS39ADcHSCt1lLdK-7XQ8w_1uTX3_qA';
+        const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+        const { data, error } = await client
+            .from('turnos')
+            .select('*');
+
+        if (error) {
+            console.error('Error fetching events:', error);
+            return;
+        }
+
+        const events = data.map(item => ({
+            title: item.nombre,
+            start: item.fecha,
+            extendedProps: { horario: item.turno },
+            description: item.turno
+        }));
+
+        calendar.removeAllEvents();
+        calendar.addEventSource(events);
+    };
+
+    initCalendar();
+    loadEvents();
 
     // Interaction enhancement
     const inputs = document.querySelectorAll('input, select, textarea');

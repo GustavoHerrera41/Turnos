@@ -143,6 +143,71 @@ body {
     border-color: white;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
+/* Calendar Styles */
+#calendar-container {
+    margin-top: 20px;
+}
+
+.fc {
+    color: white;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.fc .fc-button-primary {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
+}
+
+.fc .fc-button-primary:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.fc .fc-daygrid-day {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fc .fc-daygrid-day:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.fc .fc-col-header-cell {
+    background: rgba(0, 116, 217, 0.3);
+    padding: 10px 0;
+}
+
+.fc-event {
+    background-color: var(--primary-blue) !important;
+    border: none !important;
+    padding: 2px 5px;
+    font-size: 0.8rem;
+}
+
+.fc-day-today {
+    background: rgba(0, 255, 255, 0.1) !important;
+}
+
+.fc-list-day-cushion {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+    
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
 
 .form-group select option {
     background: #0074d9;
