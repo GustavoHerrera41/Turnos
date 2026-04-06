@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('appointmentForm');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Get form data
@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             turno: formData.get('turno'),
             consulta: formData.get('consulta')
         };
+
+        // Supabase configuration
+        const supabaseUrl = 'https://shuivcasusmplmkhmepi.supabase.co';
+        const supabaseKey = 'sb_publishable_uS39ADcHSCt1lLdK-7XQ8w_1uTX3_qA';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Phone number provided in requirements (+5493813043498)
         const phoneNumber = '5493813043498';
@@ -30,21 +35,45 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create WhatsApp link
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
-        // Animation effect before redirect
+        // Animation effect
         const button = form.querySelector('button');
-        button.innerText = 'Redirigiendo...';
-        button.style.background = '#e3f2fd';
-        button.style.color = '#007bff';
+        const originalText = button.innerText;
+        button.innerText = 'Guardando reserva...';
+        button.disabled = true;
 
-        setTimeout(() => {
-            window.open(whatsappUrl, '_blank');
-            button.innerText = 'Confirmar y Enviar WhatsApp';
-            button.style.background = '#ffffff';
-            button.style.color = '#007bff';
-        }, 1200);
+        // Save to Supabase and then redirect
+        try {
+            const { error: dbError } = await supabaseClient
+                .from('turnos')
+                .insert([{
+                    dni: data.dni,
+                    nombre: data.nombre,
+                    whatsapp: data.whatsapp,
+                    domicilio: data.domicilio,
+                    turno: data.turno,
+                    consulta: data.consulta
+                }]);
+
+            if (dbError) throw dbError;
+
+            button.innerText = '¡Redirigiendo!';
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                button.innerText = originalText;
+                button.disabled = false;
+                form.reset();
+            }, 1000);
+
+        } catch (err) {
+            console.error('Error al guardar:', err);
+            alert('Hubo un problema al guardar tu turno en la base de datos. Por favor, intenta de nuevo.');
+            button.innerText = originalText;
+            button.disabled = false;
+        }
     });
 
-    // Simple interaction: Add class to inputs on focus to enhance style via JS if needed
+    // Interaction enhancement
     const inputs = document.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
         input.addEventListener('focus', () => {
