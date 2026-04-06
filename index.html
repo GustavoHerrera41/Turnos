@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Turnos | Gustavo Raul Herrera</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+    </div>
+
+    <main class="container">
+        <section class="glass-card fade-in">
+            <header class="header">
+                <h1>Solicitá tu Turno</h1>
+                <p>Completá tus datos para agendar una consulta.</p>
+            </header>
+
+            <form id="appointmentForm" class="form">
+                <div class="form-group slide-up" style="--delay: 0.1s">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" required placeholder="Ingresá tu DNI">
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.2s">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.3s">
+                    <label for="whatsapp">WhatsApp</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+54 9 ...">
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.4s">
+                    <label for="domicilio">Domicilio</label>
+                    <input type="text" id="domicilio" name="domicilio" required placeholder="Tu dirección">
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.5s">
+                    <label for="turno">Horario de Turno</label>
+                    <select id="turno" name="turno" required>
+                        <option value="" disabled selected>Seleccioná un horario</option>
+                        <option value="Mañana (08:30 a 12:30)">Mañana (08:30 a 12:30)</option>
+                        <option value="Tarde (14:00 a 18:00)">Tarde (14:00 a 18:00)</option>
+                        <option value="Noche (19:00 a 22:00)">Noche (19:00 a 22:00)</option>
+                    </select>
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.6s">
+                    <label for="consulta">Razones de la consulta</label>
+                    <textarea id="consulta" name="consulta" rows="3" required placeholder="¿Cuál es el motivo de tu visita?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn scale-hover">Confirmar y Enviar WhatsApp</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer fade-in">
+        <p>Creado por <strong>Gustavo Raul Herrera</strong></p>
+        <p>Todos los derechos reservados &copy; 2026</p>
+        <p>Contacto: <a href="mailto:gustavoherrera587@gmail.com">gustavoherrera587@gmail.com</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

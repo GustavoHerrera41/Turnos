@@ -1,0 +1,217 @@
+:root {
+    --primary-blue: #007bff;
+    --secondary-blue: #0056b3;
+    --accent-blue: #e3f2fd;
+    --glass-bg: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-white: #ffffff;
+    --text-dark: #333333;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #001f3f, #0074d9, #7fdbff, #39cccc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+}
+
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    color: var(--text-white);
+}
+
+.header h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.header p {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    opacity: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.form-group select option {
+    background: #0074d9;
+    color: white;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--primary-blue);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .glass-card {
+        padding: 25px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+}
