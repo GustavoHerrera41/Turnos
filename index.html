@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="style.css">
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 </head>
 <body>
     <div class="background-animation">
@@ -19,6 +23,7 @@
     </div>
 
     <main class="container">
+        <!-- Reserva Form -->
         <section class="glass-card fade-in">
             <header class="header">
                 <h1>Solicitá tu Turno</h1>
@@ -44,6 +49,11 @@
                 <div class="form-group slide-up" style="--delay: 0.4s">
                     <label for="domicilio">Domicilio</label>
                     <input type="text" id="domicilio" name="domicilio" required placeholder="Tu dirección">
+                </div>
+
+                <div class="form-group slide-up" style="--delay: 0.45s">
+                    <label for="fecha">Día del Turno</label>
+                    <input type="date" id="fecha" name="fecha" required>
                 </div>
 
                 <div class="form-group slide-up" style="--delay: 0.5s">
@@ -77,6 +87,17 @@
 
                 <button type="submit" class="submit-btn scale-hover">Confirmar y Enviar WhatsApp</button>
             </form>
+        </section>
+
+        <!-- Calendario View -->
+        <section class="glass-card fade-in" style="margin-top: 30px;">
+            <header class="header">
+                <h2>Agenda de Turnos</h2>
+                <p>Visualiza los horarios ya ocupados.</p>
+            </header>
+            <div id="calendar-container">
+                <div id="calendar"></div>
+            </div>
         </section>
     </main>
 
