@@ -48,9 +48,23 @@
                     <label for="turno">Horario de Turno</label>
                     <select id="turno" name="turno" required>
                         <option value="" disabled selected>Seleccioná un horario</option>
-                        <option value="Mañana (08:30 a 12:30)">Mañana (08:30 a 12:30)</option>
-                        <option value="Tarde (14:00 a 18:00)">Tarde (14:00 a 18:00)</option>
-                        <option value="Noche (19:00 a 22:00)">Noche (19:00 a 22:00)</option>
+                        <optgroup label="Mañana">
+                            <option value="08:30 a 09:30">08:30 a 09:30</option>
+                            <option value="09:30 a 10:30">09:30 a 10:30</option>
+                            <option value="10:30 a 11:30">10:30 a 11:30</option>
+                            <option value="11:30 a 12:30">11:30 a 12:30</option>
+                        </optgroup>
+                        <optgroup label="Tarde">
+                            <option value="14:00 a 15:00">14:00 a 15:00</option>
+                            <option value="15:00 a 16:00">15:00 a 16:00</option>
+                            <option value="16:00 a 17:00">16:00 a 17:00</option>
+                            <option value="17:00 a 18:00">17:00 a 18:00</option>
+                        </optgroup>
+                        <optgroup label="Noche">
+                            <option value="19:00 a 20:00">19:00 a 20:00</option>
+                            <option value="20:00 a 21:00">20:00 a 21:00</option>
+                            <option value="21:00 a 22:00">21:00 a 22:00</option>
+                        </optgroup>
                     </select>
                 </div>
 
