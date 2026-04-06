@@ -46,12 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const events = data.map(item => ({
-            title: item.nombre,
-            start: item.fecha,
-            extendedProps: { horario: item.turno },
-            description: item.turno
-        }));
+        const events = data.map(item => {
+            // item.turno is like "08:30 a 09:30"
+            const times = item.turno.split(' a ');
+            const startStr = times[0];
+            const endStr = times[1];
+            
+            return {
+                title: 'Ocupado',
+                start: `${item.fecha}T${startStr}:00`,
+                end: `${item.fecha}T${endStr}:00`,
+                extendedProps: { horario: item.turno },
+                allDay: false
+            };
+        });
 
         calendar.removeAllEvents();
         calendar.addEventSource(events);
@@ -215,4 +223,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initCalendar();
     loadEvents();
+
+    // --- Dynamic Slot Availability ---
+    const fechaInput = document.getElementById('fecha');
+    const turnoSelect = document.getElementById('turno');
+    const turnoOptions = turnoSelect.querySelectorAll('option:not([value=""])');
+    
+    // Disable turno until date is chosen
+    turnoSelect.disabled = true;
+
+    fechaInput.addEventListener('change', async () => {
+        const selectedDate = fechaInput.value;
+        if (!selectedDate) {
+            turnoSelect.disabled = true;
+            return;
+        }
+
+        turnoSelect.disabled = true;
+        const originalLabel = turnoSelect.previousElementSibling.innerText;
+        turnoSelect.previousElementSibling.innerText = 'Cargando disponibilidad...';
+
+        try {
+            const { data: booked, error } = await supabaseClient
+                .from('turnos')
+                .select('turno')
+                .eq('fecha', selectedDate);
+
+            if (error) throw error;
+
+            const bookedTurnos = booked.map(b => b.turno);
+
+            turnoOptions.forEach(opt => {
+                if (bookedTurnos.includes(opt.value)) {
+                    opt.disabled = true;
+                    opt.innerText = opt.value + ' (Ocupado)';
+                } else {
+                    opt.disabled = false;
+                    opt.innerText = opt.value;
+                }
+            });
+
+            // If current selection is now disabled, reset it
+            if (turnoSelect.selectedOptions[0]?.disabled) {
+                turnoSelect.value = "";
+            }
+
+            turnoSelect.disabled = false;
+            turnoSelect.previousElementSibling.innerText = 'Horario de Turno (Actualizado)';
+            setTimeout(() => {
+                turnoSelect.previousElementSibling.innerText = 'Horario de Turno';
+            }, 2000);
+
+        } catch (err) {
+            console.error('Error al cargar disponibilidad:', err);
+            turnoSelect.disabled = false;
+            turnoSelect.previousElementSibling.innerText = 'Horario de Turno';
+        }
+    });
 });

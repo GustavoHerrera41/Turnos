@@ -24,85 +24,87 @@
     </div>
 
     <main class="container">
-        <!-- Reserva Form -->
-        <section class="glass-card fade-in">
-            <header class="header">
-                <h1>Solicitá tu Turno</h1>
-                <p>Completá tus datos para agendar una consulta.</p>
-            </header>
+        <div class="content-wrapper">
+            <!-- Reserva Form -->
+            <section class="glass-card fade-in">
+                <header class="header">
+                    <h1>Solicitá tu Turno</h1>
+                    <p>Completá tus datos para agendar una consulta.</p>
+                </header>
 
-            <form id="appointmentForm" class="form">
-                <div class="form-group slide-up" style="--delay: 0.1s">
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni" required placeholder="Ingresá tu DNI">
+                <form id="appointmentForm" class="form">
+                    <div class="form-group slide-up" style="--delay: 0.1s">
+                        <label for="dni">DNI</label>
+                        <input type="text" id="dni" name="dni" required placeholder="Ingresá tu DNI">
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.2s">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.3s">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+54 9 ...">
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.4s">
+                        <label for="domicilio">Domicilio</label>
+                        <input type="text" id="domicilio" name="domicilio" required placeholder="Tu dirección">
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.45s">
+                        <label for="fecha">Día del Turno</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.5s">
+                        <label for="turno">Horario de Turno</label>
+                        <select id="turno" name="turno" required>
+                            <option value="" disabled selected>Seleccioná un horario</option>
+                            <optgroup label="Mañana">
+                                <option value="08:30 a 09:30">08:30 a 09:30</option>
+                                <option value="09:30 a 10:30">09:30 a 10:30</option>
+                                <option value="10:30 a 11:30">10:30 a 11:30</option>
+                                <option value="11:30 a 12:30">11:30 a 12:30</option>
+                            </optgroup>
+                            <optgroup label="Tarde">
+                                <option value="14:00 a 15:00">14:00 a 15:00</option>
+                                <option value="15:00 a 16:00">15:00 a 16:00</option>
+                                <option value="16:00 a 17:00">16:00 a 17:00</option>
+                                <option value="17:00 a 18:00">17:00 a 18:00</option>
+                            </optgroup>
+                            <optgroup label="Noche">
+                                <option value="19:00 a 20:00">19:00 a 20:00</option>
+                                <option value="20:00 a 21:00">20:00 a 21:00</option>
+                                <option value="21:00 a 22:00">21:00 a 22:00</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group slide-up" style="--delay: 0.6s">
+                        <label for="consulta">Razones de la consulta</label>
+                        <textarea id="consulta" name="consulta" rows="3" required placeholder="¿Cuál es el motivo de tu visita?"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn scale-hover">Confirmar y Enviar WhatsApp</button>
+                </form>
+            </section>
+
+            <!-- Calendario View -->
+            <section class="glass-card fade-in">
+                <header class="header">
+                    <h2>Agenda de Turnos</h2>
+                    <p>Visualiza los horarios ya ocupados.</p>
+                </header>
+                <div id="calendar-container">
+                    <div id="calendar"></div>
                 </div>
-
-                <div class="form-group slide-up" style="--delay: 0.2s">
-                    <label for="nombre">Nombre Completo</label>
-                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                <div class="admin-access">
+                    <button id="adminLoginBtn" class="admin-btn">Acceso Administrador</button>
                 </div>
-
-                <div class="form-group slide-up" style="--delay: 0.3s">
-                    <label for="whatsapp">WhatsApp</label>
-                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+54 9 ...">
-                </div>
-
-                <div class="form-group slide-up" style="--delay: 0.4s">
-                    <label for="domicilio">Domicilio</label>
-                    <input type="text" id="domicilio" name="domicilio" required placeholder="Tu dirección">
-                </div>
-
-                <div class="form-group slide-up" style="--delay: 0.45s">
-                    <label for="fecha">Día del Turno</label>
-                    <input type="date" id="fecha" name="fecha" required>
-                </div>
-
-                <div class="form-group slide-up" style="--delay: 0.5s">
-                    <label for="turno">Horario de Turno</label>
-                    <select id="turno" name="turno" required>
-                        <option value="" disabled selected>Seleccioná un horario</option>
-                        <optgroup label="Mañana">
-                            <option value="08:30 a 09:30">08:30 a 09:30</option>
-                            <option value="09:30 a 10:30">09:30 a 10:30</option>
-                            <option value="10:30 a 11:30">10:30 a 11:30</option>
-                            <option value="11:30 a 12:30">11:30 a 12:30</option>
-                        </optgroup>
-                        <optgroup label="Tarde">
-                            <option value="14:00 a 15:00">14:00 a 15:00</option>
-                            <option value="15:00 a 16:00">15:00 a 16:00</option>
-                            <option value="16:00 a 17:00">16:00 a 17:00</option>
-                            <option value="17:00 a 18:00">17:00 a 18:00</option>
-                        </optgroup>
-                        <optgroup label="Noche">
-                            <option value="19:00 a 20:00">19:00 a 20:00</option>
-                            <option value="20:00 a 21:00">20:00 a 21:00</option>
-                            <option value="21:00 a 22:00">21:00 a 22:00</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="form-group slide-up" style="--delay: 0.6s">
-                    <label for="consulta">Razones de la consulta</label>
-                    <textarea id="consulta" name="consulta" rows="3" required placeholder="¿Cuál es el motivo de tu visita?"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn scale-hover">Confirmar y Enviar WhatsApp</button>
-            </form>
-        </section>
-
-        <!-- Calendario View -->
-        <section class="glass-card fade-in" style="margin-top: 30px;">
-            <header class="header">
-                <h2>Agenda de Turnos</h2>
-                <p>Visualiza los horarios ya ocupados.</p>
-            </header>
-            <div id="calendar-container">
-                <div id="calendar"></div>
-            </div>
-            <div class="admin-access">
-                <button id="adminLoginBtn" class="admin-btn">Acceso Administrador</script>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- Admin Panel (Hidden by default) -->
         <section id="adminPanel" class="glass-card fade-in hidden" style="margin-top: 30px; background: rgba(0, 0, 0, 0.4);">
